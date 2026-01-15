@@ -70,7 +70,7 @@
   <Box>
     <GuideEntityEmbed Entity="RMCHandcuffs"/>
   </Box>
-  [bold]Handcuffs are a core tool for [color=#ff000d][bold]MP[/bold][/color]s which allow you to retrain somebody by clicking on them with the cuffs in your hand.[/bold] The do-after is canceled if they move, so make sure to stun non compliant marines first. While they are handcuffed, they cannot move when you are holding on to them.
+  [bold]RMCHandcuffs are a core tool for [color=#ff000d][bold]MP[/bold][/color]s which allow you to retrain somebody by clicking on them with the cuffs in your hand.[/bold] The do-after is canceled if they move, so make sure to stun non compliant marines first. While they are handcuffed, they cannot move when you are holding on to them.
 
 
   <Box>
