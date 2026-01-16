@@ -1646,3 +1646,9 @@ BarbedWire1: RMCBarbedWire1
 BarbedWire10: RMCBarbedWire10
 BarbedWire15: RMCBarbedWire15
 BarbedWireBase: RMCBarbedWire1
+MobAvaliDummy: RMCMobAvaliDummy
+MobFelinidDummy: RMCMobFelinidDummy
+MobFeroxiDummy: RMCMobFeroxiDummy
+MobRodentiaDummy: RMCMobRodentiaDummy
+MobSkrellDummy: RMCMobSkrellDummy
+MobVulpkaninDummy: RMCMobVulpkaninDummy
