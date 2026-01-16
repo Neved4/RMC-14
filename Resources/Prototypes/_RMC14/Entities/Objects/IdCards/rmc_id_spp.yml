@@ -1,5 +1,18 @@
 ﻿- type: entity
-  id: FactionHalcyon
+  id: FactionSPP
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: IFFFaction
+  - type: FactionFrequencies
+    channels:
+    - SPP
+    - SPPCommand
+    - SPPEngi
+    - SPPMed
+    - SPPCCT
+
+- type: entity
+  id: RMCFactionHalcyon
   categories: [ HideSpawnMenu ]
   components:
   - type: IFFFaction
@@ -41,9 +54,8 @@
     job: CMSurvivor
   - type: ItemIFF
     factions:
-    - FactionSurvivor
+    - RMCFactionSurvivor
     - FactionSPP
-
 - type: entity
   parent: CMIDCardSilver
   id: RMCIDCardHalcyon
@@ -53,7 +65,7 @@
   components:
   - type: ItemIFF
     factions:
-    - FactionHalcyon
+    - RMCFactionHalcyon
   - type: Access
     groups:
     - Colony

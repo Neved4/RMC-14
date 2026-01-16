@@ -6,7 +6,6 @@
   - type: ItemIFF
     factions:
     - FactionCLF
-
 - type: entity
   parent: RMCIDCardCLFBase
   id: RMCIDCardCLFSoldier
