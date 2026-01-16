@@ -1642,3 +1642,7 @@ WeaponShotgunM42A1: RMCWeaponShotgunM42A1
 WeaponShotgunM42A2: RMCWeaponShotgunM42A2
 WeaponShotgunM890Guard: RMCWeaponShotgunM890Guard
 XenoSpikeProjectile: RMCXenoSpikeProjectile
+BarbedWire1: RMCBarbedWire1
+BarbedWire10: RMCBarbedWire10
+BarbedWire15: RMCBarbedWire15
+BarbedWireBase: RMCBarbedWire1
