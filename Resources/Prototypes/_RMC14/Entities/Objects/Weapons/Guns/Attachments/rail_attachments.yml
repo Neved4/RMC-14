@@ -27,12 +27,12 @@
   - type: HandheldLight
     addPrefix: false
     blinkingBehaviourId: blinking
-    radiatingBehaviourId: radiating
+    radiatingBehaviourId: RMCradiating
   - type: NoHandsInteractionBlocked
   - type: LightBehaviour
     behaviours:
     - !type:FadeBehaviour
-      id: radiating
+      id: RMCradiating
       interpolate: Linear
       maxDuration: 2.0
       startValue: 3.0
