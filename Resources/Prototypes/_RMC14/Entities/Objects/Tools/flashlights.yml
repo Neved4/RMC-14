@@ -10,11 +10,11 @@
         Blunt: 0
   - type: HandheldLight
     blinkingBehaviourId: blinking
-    radiatingBehaviourId: radiating
+    radiatingBehaviourId: RMCradiating
   - type: LightBehaviour
     behaviours:
       - !type:FadeBehaviour
-        id: radiating
+        id: RMCradiating
         maxDuration: 2.0
         startValue: 3.0
         endValue: 2.0
