@@ -226,18 +226,18 @@
 - type: entity
   parent: RMCPodDoorAlmayerOpen
   id: RMCPodDoorBrigLockdown
-  suffix: Open, BrigLockdown
+  suffix: Open, RMCBrigLockdown
   components:
   - type: RMCPodDoor
-    id: BrigLockdown
+    id: RMCBrigLockdown
 
 - type: entity
   parent: RMCPodDoorAlmayerOpen
   id: RMCPodDoorHangerLockdown
-  suffix: Open, HangerLockdown
+  suffix: Open, RMCHangerLockdown
   components:
   - type: RMCPodDoor
-    id: HangerLockdown
+    id: RMCHangerLockdown
 
 - type: entity
   parent: RMCPodDoor
@@ -249,10 +249,10 @@
 - type: entity
   parent: RMCPodDoorAlmayerBlack
   id: RMCPodDoorAIBlackLockdown
-  suffix: Open, AILockdown
+  suffix: Open, RMCAILockdown
   components:
   - type: RMCPodDoor
-    id: AILockdown
+    id: RMCAILockdown
   - type: Door
     state: Open
   - type: Occluder
@@ -281,10 +281,10 @@
 - type: entity
   parent: RMCPodDoorAI
   id: RMCPodDoorAILockdown
-  suffix: Open, AILockdown
+  suffix: Open, RMCAILockdown
   components:
   - type: RMCPodDoor
-    id: AILockdown
+    id: RMCAILockdown
   - type: Door
     state: Open
   - type: Occluder
