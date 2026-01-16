@@ -1464,6 +1464,26 @@ RMCGasTankPhoron: RMCGasTankPhoronFilled
 ClothingUniformJumpsuitPrisoner: RMCJumpsuitOrange
 
 # 2026-01-19
+ArmorHelmetM10: RMCArmorHelmetM10
+ArmorHelmetPMC: RMCArmorHelmetPMC
+ArmorHelmetPMCCommando: RMCArmorHelmetPMCCommando
+ArmorHelmetPMCCorporate: RMCArmorHelmetPMCCorporate
+ArmorHelmetPMCCorporateLead: RMCArmorHelmetPMCCorporateLead
+ArmorHelmetPMCDirector: RMCArmorHelmetPMCDirector
+ArmorHelmetPMCEngineer: RMCArmorHelmetPMCEngineer
+ArmorHelmetPMCFieldOfficer: RMCArmorHelmetPMCFieldOfficer
+ArmorHelmetPMCGunner: RMCArmorHelmetPMCGunner
+ArmorHelmetPMCKutjevo: RMCArmorHelmetPMCKutjevo
+ArmorHelmetPMCOfficer: RMCArmorHelmetPMCOfficer
+ArmorHelmetPMCRiot: RMCArmorHelmetPMCRiot
+ArmorHelmetPMCRiotShield: RMCArmorHelmetPMCRiotShield
+ArmorHelmetRiot: RMCArmorHelmetRiot
+ArmorHelmetRiotOld: RMCArmorHelmetRiotOld
+ArmorHelmetSPP: RMCArmorHelmetSPP
+ArmorHelmetSPPEngineer: RMCArmorHelmetSPPEngineer
+ArmorHelmetSPPHeavy: RMCArmorHelmetSPPHeavy
+GoldHandcannonBeltFilled: RMCGoldHandcannonBeltFilled
+JumpsuitMarine: RMCJumpsuitMarine
 
 # 2026-01-27
 RMCJumpsuitUNSecurity: RMCJumpsuitRiotControl
