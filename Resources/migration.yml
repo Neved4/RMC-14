@@ -1484,6 +1484,7 @@ ArmorHelmetSPPEngineer: RMCArmorHelmetSPPEngineer
 ArmorHelmetSPPHeavy: RMCArmorHelmetSPPHeavy
 GoldHandcannonBeltFilled: RMCGoldHandcannonBeltFilled
 JumpsuitMarine: RMCJumpsuitMarine
+WeYaExperimentalToolsVendor: RMCWeYaExperimentalToolsVendor
 
 # 2026-01-27
 RMCJumpsuitUNSecurity: RMCJumpsuitRiotControl
