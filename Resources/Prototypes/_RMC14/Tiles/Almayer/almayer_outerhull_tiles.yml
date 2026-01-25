@@ -9,6 +9,7 @@
   id: CMFloorOuterHullSouth
   name: tiles-rmc-outer-hull
   sprite: /Textures/_RMC14/Tiles/almayer/outerhull_dir_0.png
+  allowRotationMirror: true
 
 - type: tile
   parent: CMFloorOuterHull
@@ -39,6 +40,7 @@
   parent: CMFloorOuterHull
   id: CMFloorOuterHullSouthEast
   sprite: /Textures/_RMC14/Tiles/almayer/outerhull_dir_4.png
+  allowRotationMirror: true
 
 - type: tile
   parent: CMFloorOuterHull

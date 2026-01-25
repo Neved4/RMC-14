@@ -97,6 +97,7 @@
   id: CMFloorSteelPrisonRampNorth
   name: ramp
   sprite: /Textures/_RMC14/Tiles/prison/ramptop_north.png
+  allowRotationMirror: true
 
 - type: tile
   parent: CMFloorSteelPrisonRampNorth
