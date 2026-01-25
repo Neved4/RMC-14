@@ -86,6 +86,9 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
 
             var grid = new Entity<MapGridComponent>(gridId, gridComp);
             var indices = _map.CoordinatesToTile(gridId, gridComp, uid.ToCoordinates());
+            if (weeds.IsSource)
+                ApplyWallWeeds(uid, uid, grid, indices, weeds, weeds);
+
             foreach (var cardinal in _rmcMap.AtmosCardinalDirections)
             {
                 var blocked = false;
@@ -179,53 +182,60 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
 
                 EnsureComp<ActiveEdgeSpreaderComponent>(neighborWeeds);
 
-                for (var i = 0; i < 4; i++)
+                ApplyWallWeeds(source, neighborWeeds, grid, neighbor, neighborWeedsComp, sourceWeeds);
+            }
+        }
+    }
+
+    private void ApplyWallWeeds(EntityUid? source, EntityUid weedsEntity,
+        Entity<MapGridComponent> grid, Vector2i weedsTile, XenoWeedsComponent weeds,
+        XenoWeedsComponent? sourceWeeds)
+    {
+        for (var i = 0; i < 4; i++)
+        {
+            var dir = (AtmosDirection)(1 << i);
+            var pos = weedsTile.Offset(dir);
+            if (!_map.TryGetTileRef(grid, grid, pos, out var adjacent))
+                continue;
+
+            _anchored.Clear();
+            _map.GetAnchoredEntities(grid, adjacent.GridIndices, _anchored);
+            foreach (var anchoredId in _anchored)
+            {
+                if (!_xenoWeedableQuery.TryComp(anchoredId, out var weedable) ||
+                    !TryComp(anchoredId, out TransformComponent? weedableTransform) ||
+                    !weedableTransform.Anchored ||
+                    weedable.Entity != null)
                 {
-                    var dir = (AtmosDirection)(1 << i);
-                    var pos = neighbor.Offset(dir);
-                    if (!_map.TryGetTileRef(grid, grid, pos, out var adjacent))
-                        continue;
-
-                    _anchored.Clear();
-                    _map.GetAnchoredEntities(grid, adjacent.GridIndices, _anchored);
-                    foreach (var anchoredId in _anchored)
-                    {
-                        if (!_xenoWeedableQuery.TryComp(anchoredId, out var weedable) ||
-                            !TryComp(anchoredId, out TransformComponent? weedableTransform) ||
-                            !weedableTransform.Anchored ||
-                            weedable.Entity != null)
-                        {
-                            continue;
-                        }
-
-                        if (source != null)
-                        {
-                            var ev = new AfterEntityWeedingEvent(neighborWeeds, anchoredId);
-                            RaiseLocalEvent(source.Value, ref ev);
-                        }
-
-                        neighborWeedsComp.LocalWeeded.Add(anchoredId);
-
-                        if (!HasComp<CommunicationsTowerComponent>(anchoredId))
-                            _appearance.SetData(anchoredId, WeededEntityLayers.Layer, true);
-
-                        if (weedable.Spawn == null)
-                            continue;
-
-                        weedable.Entity = SpawnAtPosition(weedable.Spawn, anchoredId.ToCoordinates());
-                        var wallWeeds = EnsureComp<XenoWallWeedsComponent>(weedable.Entity.Value);
-                        wallWeeds.Weeds = source;
-                        Dirty(weedable.Entity.Value, wallWeeds);
-
-                        if (_xenoNestSurfaceQuery.TryComp(weedable.Entity, out var surface))
-                        {
-                            surface.Weedable = anchoredId;
-                            Dirty(weedable.Entity.Value, surface);
-                        }
-
-                        sourceWeeds?.Spread.Add(weedable.Entity.Value);
-                    }
+                    continue;
                 }
+
+                if (source != null)
+                {
+                    var ev = new AfterEntityWeedingEvent(weedsEntity, anchoredId);
+                    RaiseLocalEvent(source.Value, ref ev);
+                }
+
+                weeds.LocalWeeded.Add(anchoredId);
+
+                if (!HasComp<CommunicationsTowerComponent>(anchoredId))
+                    _appearance.SetData(anchoredId, WeededEntityLayers.Layer, true);
+
+                if (weedable.Spawn == null)
+                    continue;
+
+                weedable.Entity = SpawnAtPosition(weedable.Spawn, anchoredId.ToCoordinates());
+                var wallWeeds = EnsureComp<XenoWallWeedsComponent>(weedable.Entity.Value);
+                wallWeeds.Weeds = source;
+                Dirty(weedable.Entity.Value, wallWeeds);
+
+                if (_xenoNestSurfaceQuery.TryComp(weedable.Entity, out var surface))
+                {
+                    surface.Weedable = anchoredId;
+                    Dirty(weedable.Entity.Value, surface);
+                }
+
+                sourceWeeds?.Spread.Add(weedable.Entity.Value);
             }
         }
     }
