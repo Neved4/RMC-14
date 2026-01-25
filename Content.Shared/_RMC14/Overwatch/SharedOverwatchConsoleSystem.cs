@@ -841,14 +841,20 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
 
         _nextUpdateTime = time + _updateEvery;
 
-        OverwatchConsoleBuiState? state = null;
+        var states = new Dictionary<string, OverwatchConsoleBuiState>();
         var query = EntityQueryEnumerator<OverwatchConsoleComponent>();
         while (query.MoveNext(out var uid, out var console))
         {
             if (!_ui.IsUiOpen(uid, OverwatchConsoleUI.Key))
                 continue;
 
-            state ??= GetOverwatchBuiState(console);
+            var group = console.Group ?? string.Empty;
+            if (!states.TryGetValue(group, out var state))
+            {
+                state = GetOverwatchBuiState(console);
+                states[group] = state;
+            }
+
             _ui.SetUiState(uid, OverwatchConsoleUI.Key, state);
         }
     }
