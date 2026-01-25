@@ -68,7 +68,7 @@ public sealed class SharedXenoGutSystem : EntitySystem
         };
 
         var selfMsg = Loc.GetString("rmc-gut-start-self");
-        var othersMsg = Loc.GetString("rmc-gut-start-others", ("user", xeno.Owner), ("target", args.Target));
+        var othersMsg = Loc.GetString("rmc-gut-start-others-anon");
         _popup.PopupPredicted(selfMsg, othersMsg, xeno.Owner, xeno.Owner, PopupType.LargeCaution);
 
         _doAfter.TryStartDoAfter(doAfter);
@@ -102,7 +102,7 @@ public sealed class SharedXenoGutSystem : EntitySystem
         }
 
         var selfMsg = Loc.GetString("rmc-gut-finish-self");
-        var othersMsg = Loc.GetString("rmc-gut-finish-others", ("user", xeno.Owner), ("target", args.Target));
+        var othersMsg = Loc.GetString("rmc-gut-finish-others-anon");
         _popup.PopupPredicted(selfMsg, othersMsg, xeno.Owner, xeno.Owner, PopupType.LargeCaution);
 
         foreach (var action in _rmcActions.GetActionsWithEvent<XenoGutActionEvent>(xeno))
