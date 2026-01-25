@@ -14,6 +14,20 @@
     - HideContextMenu
 
 - type: entity
+  parent: RMCBaseEffect
+  id: RMCBaseGibSplatter
+  abstract: true
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    noRot: true
+    drawdepth: FloorObjects
+  - type: Tag
+    tags:
+    - HideContextMenu
+
+- type: entity
   parent: RMCBaseGibEffect
   id: RMCGibEffectXenoSmall
   categories: [ HideSpawnMenu ]
@@ -32,3 +46,21 @@
     state: lesser_gib
   - type: TimedDespawn
     lifetime: 0.8
+
+- type: entity
+  parent: RMCBaseGibSplatter
+  id: RMCGibSplatterXenoDrone
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Decals/gibs.rsi
+    state: drone
+
+- type: entity
+  parent: RMCBaseGibSplatter
+  id: RMCGibSplatterXenoLesserDrone
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Decals/gibs.rsi
+    state: lesser_drone

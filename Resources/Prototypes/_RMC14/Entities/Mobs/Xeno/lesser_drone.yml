@@ -76,7 +76,7 @@
     gibChance: 1.0
   - type: RMCSpawnEntitiesOnGib
     entities:
-    - RMCDecalSpawnerGibsLesserDrone
+    - RMCGibSplatterXenoLesserDrone
     - RMCGibEffectXenoLesserDrone
   - type: WhitelistPickup
     whitelist:
