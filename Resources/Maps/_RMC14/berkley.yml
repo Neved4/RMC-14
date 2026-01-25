@@ -16,8 +16,8 @@ tilemap:
   99: Space
   27: CMFloorCargo
   63: CMFloorCargoArrowDown
-  19: CMFloorCargoArrowLeft
-  78: CMFloorCargoArrowUp
+  19: CMFloorCargoArrowDown
+  78: CMFloorCargoArrowDown
   1: CMFloorPlate
   0: CMFloorPlating
   3: CMFloorSteel

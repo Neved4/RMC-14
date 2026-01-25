@@ -23,6 +23,7 @@
   parent: CMFloorCorsatMarkedBase
   id: CMFloorCorsatArrowSouth
   sprite: /Textures/_RMC14/Tiles/corsat/arrow_south.png
+  allowRotationMirror: true
 
 - type: tile
   parent: CMFloorCorsatMarkedBase
