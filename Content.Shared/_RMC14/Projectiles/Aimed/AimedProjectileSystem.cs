@@ -6,6 +6,7 @@ using Content.Shared._RMC14.Slow;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Weapons.Ranged.AimedShot.FocusedShooting;
 using Content.Shared.Damage;
+using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Projectiles;
 using Content.Shared.StatusEffect;
@@ -27,14 +28,18 @@ public sealed class AimedProjectileSystem : EntitySystem
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<AimedProjectileComponent, ProjectileHitEvent>(OnAimedProjectileHit);
-        SubscribeLocalEvent<AimedProjectileComponent, BeforeAreaDamageEvent>(OnBeforeAreaDamage);
+        SubscribeLocalEvent<AimedProjectileComponent, ProjectileHitEvent>(
+            OnAimedProjectileHit);
+        SubscribeLocalEvent<AimedProjectileComponent, BeforeAreaDamageEvent>(
+            OnBeforeAreaDamage);
     }
 
     /// <summary>
     ///     Apply any bonus effects the projectile has if shot using the aimed shot action.
     /// </summary>
-    private void OnAimedProjectileHit(Entity<AimedProjectileComponent> ent, ref ProjectileHitEvent args)
+    private void OnAimedProjectileHit(
+        Entity<AimedProjectileComponent> ent,
+        ref ProjectileHitEvent args)
     {
         if (!TryComp(ent, out AimedShotEffectComponent? aimedEffect) || args.Handled)
             return;
@@ -60,19 +65,28 @@ public sealed class AimedProjectileSystem : EntitySystem
 
         // Apply bonus damage
         var apValue = 0;
-        var damage =  args.Damage * aimedEffect.ExtraHits + aimedEffect.CurrentHealthDamage;
+        var damage =
+            args.Damage * aimedEffect.ExtraHits + aimedEffect.CurrentHealthDamage;
 
         if (TryComp(ent, out CMArmorPiercingComponent? armorPiercing))
             apValue = armorPiercing.Amount;
 
-        _damageable.TryChangeDamage(target, damage, tool: ent.Comp.Source, armorPiercing: apValue);
+        _damageable.TryChangeDamage(
+            target,
+            damage,
+            tool: ent.Comp.Source,
+            armorPiercing: apValue);
 
         // Apply slows
         _slow.TrySlowdown(target, aimedEffect.SlowDuration);
         _slow.TrySuperSlowdown(target, superSlowDuration);
 
         // Apply blind
-        _statusEffects.TryAddStatusEffect<RMCBlindedComponent>(target, BlindKey, blindDuration, false);
+        _statusEffects.TryAddStatusEffect<RMCBlindedComponent>(
+            target,
+            BlindKey,
+            blindDuration,
+            false);
 
         // Apply firestacks
         if (TryComp(ent, out IgniteOnProjectileHitComponent? ignite))
@@ -84,7 +98,9 @@ public sealed class AimedProjectileSystem : EntitySystem
     /// <summary>
     ///     Cancel dealing area damage if an aimed shot hits it's target.
     /// </summary>
-    private void OnBeforeAreaDamage(Entity<AimedProjectileComponent> ent, ref BeforeAreaDamageEvent args)
+    private void OnBeforeAreaDamage(
+        Entity<AimedProjectileComponent> ent,
+        ref BeforeAreaDamageEvent args)
     {
         if (args.Target == ent.Comp.Target)
             args.Cancelled = true;
@@ -93,7 +109,11 @@ public sealed class AimedProjectileSystem : EntitySystem
     /// <summary>
     ///     Applies the focus effects to the projectile based on the amount of focus stacks the shooter has and the type of target.
     /// </summary>
-    private void CalculateFocusEffects(Entity<AimedProjectileComponent> ent, EntityUid target, RMCFocusedShootingComponent focusEffect, AimedShotEffectComponent aimedEffect)
+    private void CalculateFocusEffects(
+        Entity<AimedProjectileComponent> ent,
+        EntityUid target,
+        RMCFocusedShootingComponent focusEffect,
+        AimedShotEffectComponent aimedEffect)
     {
         var slowDuration = 0f;
         var focusedFire = false;
@@ -131,20 +151,32 @@ public sealed class AimedProjectileSystem : EntitySystem
 
             if (TryComp(target, out DamageableComponent? damageable))
             {
-                _mobThresholds.TryGetIncapThreshold(target, out var threshold);
-                if(threshold == null)
+                if (!TryComp(target, out MobThresholdsComponent? thresholds) ||
+                    !_mobThresholds.TryGetIncapThreshold(
+                        target,
+                        out var threshold,
+                        thresholds))
                     return;
 
                 // Calculate the current health damage
                 var damage = new DamageSpecifier();
-                damage.DamageDict.Add("Piercing", (threshold.Value - damageable.TotalDamage) * currentHealthDamage);
+                damage.DamageDict.Add(
+                    "Piercing",
+                    (threshold.Value - damageable.TotalDamage) *
+                    currentHealthDamage);
 
                 // Apply a multiplier to the bonus damage based on the amount of focus stacks.
                 if (focusedFire)
                 {
-                    damage *= focusEffect.BaseFocusMultiplier + focusEffect.FocusMultiplier * focusEffect.FocusCounter;
-                    damageIncreaseModifier *= focusEffect.BaseFocusMultiplier + focusEffect.FocusMultiplier * focusEffect.FocusCounter;
-                    slowDuration *= focusEffect.BaseFocusMultiplier + focusEffect.FocusMultiplier * focusEffect.FocusCounter;
+                    damage *= focusEffect.BaseFocusMultiplier +
+                              focusEffect.FocusMultiplier *
+                              focusEffect.FocusCounter;
+                    damageIncreaseModifier *= focusEffect.BaseFocusMultiplier +
+                                              focusEffect.FocusMultiplier *
+                                              focusEffect.FocusCounter;
+                    slowDuration *= focusEffect.BaseFocusMultiplier +
+                                    focusEffect.FocusMultiplier *
+                                    focusEffect.FocusCounter;
                 }
 
                 aimedEffect.ExtraHits = damageIncreaseModifier;
@@ -163,7 +195,8 @@ public sealed class AimedProjectileSystem : EntitySystem
                 aimedEffect.SuperSlowDuration = TimeSpan.FromSeconds(slowDuration);
 
             // Apply a short dazed effect if hit by high stopping power.
-            if (stoppingPower != null && stoppingPower.CurrentStoppingPower > focusEffect.DazeThreshold)
+            if (stoppingPower != null &&
+                stoppingPower.CurrentStoppingPower > focusEffect.DazeThreshold)
                 _dazed.TryDaze(target, TimeSpan.FromSeconds(focusEffect.DazeDuration));
         }
 
