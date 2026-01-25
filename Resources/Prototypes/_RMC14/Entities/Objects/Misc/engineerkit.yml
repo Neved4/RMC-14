@@ -18,6 +18,7 @@
     whitelist:
       tags:
       - RMCCircuitboard
+      - DoorElectronics
       - Flashlight
       - RMCWeldingGoggle
       # - TODO RMC14 RMCAnalyzer
