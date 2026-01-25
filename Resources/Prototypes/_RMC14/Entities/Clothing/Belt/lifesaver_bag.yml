@@ -18,6 +18,7 @@
       - BodyBag
       - Bottle
       - PillCanister
+      - PillPacket
       - Syringe
       - CMAutoInjector
       - Brutepack

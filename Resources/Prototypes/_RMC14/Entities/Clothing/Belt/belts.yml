@@ -390,6 +390,7 @@
       - GlassBeaker
       - Bottle
       - PillCanister
+      - PillPacket
       - Syringe
       - CMSurgicalLine
       - CMSynthGraft

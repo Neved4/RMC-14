@@ -19,6 +19,7 @@
       - CMBloodPack
       #      - TODO RMC14 splint
       - PillCanister
+      - PillPacket
       - DiscreteHealthAnalyzer
       - CMFireExtinguisherPortable
       - CMSurgicalLine

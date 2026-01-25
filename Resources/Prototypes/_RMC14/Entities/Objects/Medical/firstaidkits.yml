@@ -20,6 +20,7 @@
       - DiscreteHealthAnalyzer
       - Dropper
       - Pill
+      - PillPacket
       - Bottle
       - Syringe
       - PillCanister
@@ -88,6 +89,7 @@
       - DiscreteHealthAnalyzer
       - Dropper
       - Pill
+      - PillPacket
       - Bottle
       - Syringe
       - PillCanister
