@@ -12,6 +12,7 @@
           steps:
             - material: CMSteel
               amount: 1
+              doAfter: 1
 
     - node: nodeBarbedWire
       entity: BarbedWire1
