@@ -385,9 +385,11 @@ rmc-xeno-fling-too-big = {CAPITALIZE(THE($target))} is too big for us to fling!
 # Gut
 rmc-gut-start-self = We plunge our claws into the body of this unfortunate host, starting to tear them in half!
 rmc-gut-start-others = {$user} plunges their claws into the body of {$target}, starting to tear them in half!
+rmc-gut-start-others-anon = A xenomorph plunges its claws into a victim, starting to tear them in half!
 
 rmc-gut-finish-self = We tear this pathetic host in half!!
 rmc-gut-finish-others = {$user} tears {$target} in half!!
+rmc-gut-finish-others-anon = A xenomorph tears a victim in half!!
 
 # Shed Spikes
 rmc-shed-spikes = We have shed our shards and cannot gain any more for 30 seconds!
