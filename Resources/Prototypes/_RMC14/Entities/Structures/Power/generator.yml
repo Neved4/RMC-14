@@ -125,25 +125,9 @@
 
 - type: entity
   abstract: true
-  id: RMCPortableGeneratorBase # TODO RMC14 - Functionality
-  parent: [ BaseMachine, SmallConstructibleMachine, StructureWheeled]
+  id: RMCPortableGeneratorBase
+  parent: PortableGeneratorSwitchableBase
   components:
-    - type: Transform
-      anchored: False
-    - type: Physics
-      bodyType: Dynamic
-    - type: Fixtures
-      fixtures:
-        fix1:
-          shape:
-            !type:PhysShapeAabb
-            bounds: "-0.40,-0.40,0.40,0.40"
-          density: 155
-          mask:
-            - MachineMask
-          layer:
-            - MachineLayer
-    - type: Appearance
     - type: Sprite
       sprite: _RMC14/Structures/Power/generators.rsi
       noRot: true
@@ -177,6 +161,34 @@
       state: portgen0
     - type: Machine
       board: RMCPortableGeneratorPacmanMachineCircuitBoard
+    - type: FuelGenerator
+      minTargetPower: 5000
+      maxTargetPower: 30000
+      targetPower: 30000
+      optimalPower: 30000
+      optimalBurnRate: 0.0333333
+      fuelEfficiencyConstant: 0.75
+    - type: SolidFuelGeneratorAdapter
+      fuelMaterial: CMPhoron
+      multiplier: 0.01
+    - type: MaterialStorage
+      storageLimit: 3000
+      materialWhiteList: [CMPhoron]
+    - type: PortableGenerator
+      startChance: 0.8
+    - type: GeneratorExhaustGas
+      gasType: CarbonDioxide
+      moleRatio: 2
+    - type: PowerMonitoringDevice
+      group: Generator
+      loadNodes:
+        - output_hv
+        - output_mv
+      sprite: _RMC14/Structures/Power/generators.rsi
+      state: portgen0
+    - type: PowerSupplier
+      supplyRampRate: 5000
+      supplyRampTolerance: 1500
 
 - type: entity
   parent: RMCPortableGeneratorBase
@@ -188,3 +200,27 @@
       state: portgen1
     - type: Machine
       board: RMCPortableGeneratorSuperPacmanMachineCircuitboard
+    - type: FuelGenerator
+      minTargetPower: 10000
+      maxTargetPower: 50000
+      targetPower: 50000
+      optimalPower: 50000
+      optimalBurnRate: 0.016666666
+      fuelEfficiencyConstant: 0.1
+    - type: SolidFuelGeneratorAdapter
+      fuelMaterial: CMPhoron
+      multiplier: 0.01
+    - type: MaterialStorage
+      storageLimit: 3000
+      materialWhiteList: [CMPhoron]
+    - type: PortableGenerator
+    - type: PowerMonitoringDevice
+      group: Generator
+      loadNodes:
+        - output_hv
+        - output_mv
+      sprite: _RMC14/Structures/Power/generators.rsi
+      state: portgen1
+    - type: PowerSupplier
+      supplyRampRate: 7500
+      supplyRampTolerance: 2500
