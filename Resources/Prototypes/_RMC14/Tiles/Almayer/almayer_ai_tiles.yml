@@ -42,6 +42,7 @@
   parent: RMCFloorAINoBuild
   id: RMCFloorAINoBuildArrow
   sprite: /Textures/_RMC14/Tiles/almayer/ai/ai_arrow_0.png
+  allowRotationMirror: true
 
 - type: tile
   parent: RMCFloorAINoBuildArrow
@@ -88,4 +89,3 @@
   parent: RMCFloorAINoBuildSilver
   id: RMCFloorAINoBuildSilverWest
   sprite: /Textures/_RMC14/Tiles/almayer/ai/ai_silver_3.png
-
