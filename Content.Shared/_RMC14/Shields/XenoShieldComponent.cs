@@ -26,6 +26,10 @@ public sealed partial class XenoShieldComponent : Component
     [DataField, AutoNetworkedField]
     public bool Active = false;
 
+    public TimeSpan NextDecayUpdate;
+
+    public TimeSpan LastDecayUpdate;
+
     [DataField, AutoNetworkedField]
     public SoundSpecifier ShieldBreak = new SoundPathSpecifier("/Audio/_RMC14/Bullets/shield_break_c1.ogg");
 

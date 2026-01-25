@@ -16,7 +16,10 @@ public sealed partial class XenoShieldSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
 
-    private static readonly ProtoId<DamageTypePrototype> ShieldSoundDamageType = "Piercing";
+    private static readonly ProtoId<DamageTypePrototype>
+        ShieldSoundDamageType = "Piercing";
+    private static readonly TimeSpan DecayUpdateInterval =
+        TimeSpan.FromMilliseconds(250);
 
     public enum ShieldType
     {
@@ -127,6 +130,11 @@ public sealed partial class XenoShieldSystem : EntitySystem
             shieldComp.ShieldDecayAt = _timing.CurTime + duration.Value;
 
         shieldComp.Active = true;
+        shieldComp.LastDecayUpdate = duration == null
+            ? _timing.CurTime
+            : shieldComp.ShieldDecayAt;
+        shieldComp.NextDecayUpdate = shieldComp.LastDecayUpdate +
+            DecayUpdateInterval;
         if (visualState != null)
         {
             _appearance.SetData(uid, RMCShieldVisuals.Prefix, visualState);
@@ -174,7 +182,19 @@ public sealed partial class XenoShieldSystem : EntitySystem
             if (time < shield.ShieldDecayAt)
                 continue;
 
-            shield.ShieldAmount -= shield.DecayPerSecond * frameTime;
+            if (time < shield.NextDecayUpdate)
+                continue;
+
+            if (shield.LastDecayUpdate < shield.ShieldDecayAt)
+                shield.LastDecayUpdate = shield.ShieldDecayAt;
+
+            var decaySeconds = (time - shield.LastDecayUpdate).TotalSeconds;
+            if (decaySeconds <= 0)
+                continue;
+
+            shield.ShieldAmount -= shield.DecayPerSecond * decaySeconds;
+            shield.LastDecayUpdate = time;
+            shield.NextDecayUpdate = time + DecayUpdateInterval;
             _appearance.SetData(uid, RMCShieldVisuals.Current, shield.ShieldAmount);
 
             if (shield.ShieldAmount <= 0)
