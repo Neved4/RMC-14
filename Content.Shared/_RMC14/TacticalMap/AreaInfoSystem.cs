@@ -61,13 +61,7 @@ public sealed class AreaInfoSystem : EntitySystem
     }
     private void OnMapInit(Entity<AreaInfoComponent> ent, ref MapInitEvent args)
     {
-        var (areaName, ceilingLevel, restrictions) = GetAreaInfo(ent);
-        _alerts.ShowAlert(ent, ent.Comp.Alert,
-            severity: ceilingLevel,
-            dynamicMessage: Loc.GetString("rmc-area-info",
-                ("area", areaName),
-                ("ceilingLevel", ceilingLevel),
-                ("restrictions", restrictions)));
+        QueueAreaInfoUpdate(ent, true);
     }
     private void OnRemove(Entity<AreaInfoComponent> ent, ref ComponentRemove args)
     {
@@ -79,13 +73,21 @@ public sealed class AreaInfoSystem : EntitySystem
         if (_timing.ApplyingState)
             return;
         // update the alert when they move to a new area
-        var (areaName, ceilingLevel, restrictions) = GetAreaInfo(ent);
-        _alerts.ShowAlert(ent, ent.Comp.Alert,
-            severity: ceilingLevel,
-            dynamicMessage: Loc.GetString("rmc-area-info",
-                ("area", areaName),
-                ("ceilingLevel", ceilingLevel),
-                ("restrictions", restrictions)));
+        QueueAreaInfoUpdate(ent);
+    }
+
+    private void QueueAreaInfoUpdate(
+        Entity<AreaInfoComponent> ent,
+        bool force = false)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (!force && _timing.CurTime < ent.Comp.NextUpdateTime)
+            return;
+
+        ent.Comp.NextUpdateTime = _timing.CurTime + ent.Comp.UpdateInterval;
+        _marineAlertCopyQueue.Enqueue(ent);
     }
 
     private (string areaName, short ceilingLevel, string restrictions) GetAreaInfo(EntityUid ent)
@@ -247,15 +249,6 @@ public sealed class AreaInfoSystem : EntitySystem
                         ("ceilingLevel", ceilingLevel),
                         ("restrictions", restrictions)));
             }
-        }
-
-        var tacMapQuery = EntityQueryEnumerator<AreaInfoComponent>();
-        while (tacMapQuery.MoveNext(out var uid, out var alert))
-        {
-            if (time < alert.NextUpdateTime)
-                continue;
-            _marineAlertCopyQueue.Enqueue((uid, alert));
-            alert.NextUpdateTime = time + alert.UpdateInterval;
         }
     }
 }
