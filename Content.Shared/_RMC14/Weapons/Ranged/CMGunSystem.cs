@@ -453,8 +453,9 @@ public sealed class CMGunSystem : EntitySystem
         var targetFactionEvent = new GetIFFFactionEvent(null, SlotFlags.IDCARD);
         RaiseLocalEvent(gunComp.Target.Value, ref targetFactionEvent);
 
-        if (shooterFactionEvent.Faction != null && 
-            targetFactionEvent.Faction != null && 
+        if (HasActiveIff(gun.Owner) &&
+            shooterFactionEvent.Faction != null &&
+            targetFactionEvent.Faction != null &&
             shooterFactionEvent.Faction == targetFactionEvent.Faction &&
             HasComp<EntityActiveInvisibleComponent>(gunComp.Target))
         {
@@ -522,6 +523,14 @@ public sealed class CMGunSystem : EntitySystem
             return;
 
         args.CameraRecoilScalar = 0;
+    }
+
+    private bool HasActiveIff(EntityUid gun)
+    {
+        if (TryComp(gun, out GunIFFComponent? iff) && iff.Enabled)
+            return true;
+
+        return HasComp<GunAttachableIFFComponent>(gun);
     }
 
     private void OnAccuracySkilledGetWeaponAccuracy(Entity<GunSkilledAccuracyComponent> gun, ref GetWeaponAccuracyEvent args)
