@@ -210,7 +210,7 @@
   - type: RMCGibOnDeath
   - type: RMCSpawnEntitiesOnGib
     entities:
-    - RMCDecalSpawnerGibsDrone # TODO one for every caste
+    - RMCGibSplatterXenoDrone # TODO one for every caste
     - RMCGibEffectXenoSmall # TODO larger gib effect for larger xenos
   - type: Body
     prototype: Xenonid
