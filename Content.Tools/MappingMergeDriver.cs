@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace Content.Tools
 {
@@ -10,13 +11,25 @@ namespace Content.Tools
         /// %P: Actual filename of the resulting file
         public static void Main(string[] args)
         {
+            if (args.Length > 0 && args[0] == "rotate-tiles")
+            {
+                Environment.Exit(
+                    RotateTilesCommand.Run(args.Skip(1).ToArray()));
+            }
+
             var ours = new Map(args[0]);
             var based = new Map(args[1]); // On what?
             var other = new Map(args[2]);
 
-            if (ours.GridsNode.Children.Count != 1 || based.GridsNode.Children.Count != 1 || other.GridsNode.Children.Count != 1)
+            var oursGridCount = ours.GridsNode.Children.Count;
+            var basedGridCount = based.GridsNode.Children.Count;
+            var otherGridCount = other.GridsNode.Children.Count;
+
+            if (oursGridCount != 1 || basedGridCount != 1 ||
+                otherGridCount != 1)
             {
-                Console.WriteLine("one or more files had an amount of grids not equal to 1");
+                Console.WriteLine(
+                    "one or more files had an amount of grids not equal to 1");
                 Environment.Exit(1);
             }
 
