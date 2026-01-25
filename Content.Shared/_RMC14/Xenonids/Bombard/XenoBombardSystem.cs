@@ -61,7 +61,7 @@ public sealed class XenoBombardSystem : EntitySystem
             var selfMessage = Loc.GetString("rmc-glob-start-self");
             _popup.PopupClient(selfMessage, ent, ent);
 
-            var othersMessage = Loc.GetString("rmc-glob-start-others", ("user", ent));
+            var othersMessage = Loc.GetString("rmc-glob-start-others-anon");
             _popup.PopupEntity(othersMessage, ent, Filter.PvsExcept(ent), true, PopupType.MediumCaution);
         }
     }
@@ -113,7 +113,7 @@ public sealed class XenoBombardSystem : EntitySystem
         var selfMessage = Loc.GetString("rmc-glob-shoot-self");
         _popup.PopupClient(selfMessage, ent, ent);
 
-        var othersMessage = Loc.GetString("rmc-glob-shoot-others", ("user", ent));
+        var othersMessage = Loc.GetString("rmc-glob-shoot-others-anon");
         _popup.PopupEntity(othersMessage, ent, Filter.PvsExcept(ent), true, PopupType.MediumCaution);
     }
 
