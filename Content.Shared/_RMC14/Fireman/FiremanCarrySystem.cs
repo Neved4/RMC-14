@@ -300,7 +300,8 @@ public sealed class FiremanCarrySystem : EntitySystem
         _standing.Down(pulling, changeCollision: true);
         _rmcPulling.PlayPullEffect(ent, pulling);
 
-        var selfMsg = Loc.GetString("rmc-pull-aggressive-self", ("pulled", pulling));
+        var pulledSelfName = Identity.Name(pulling, EntityManager, ent);
+        var selfMsg = Loc.GetString("rmc-pull-aggressive-self", ("pulled", pulledSelfName));
         _popup.PopupClient(selfMsg, pulling, ent, PopupType.SmallCaution);
 
         var others = Filter.PvsExcept(ent, entityManager: EntityManager);
