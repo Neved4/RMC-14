@@ -4,6 +4,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Item;
 using Content.Shared.Popups;
+using Content.Shared.Storage.EntitySystems;
 using Content.Shared.Verbs;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
@@ -23,7 +24,9 @@ public abstract class SharedUniformAccessorySystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<UniformAccessoryHolderComponent, MapInitEvent>(OnHolderMapInit);
-        SubscribeLocalEvent<UniformAccessoryHolderComponent, InteractUsingEvent>(OnHolderInteractUsing);
+        SubscribeLocalEvent<UniformAccessoryHolderComponent, InteractUsingEvent>(
+            OnHolderInteractUsing,
+            before: new[] { typeof(SharedStorageSystem) });
         SubscribeLocalEvent<UniformAccessoryHolderComponent, GotEquippedEvent>(OnHolderGotEquipped);
         SubscribeLocalEvent<UniformAccessoryHolderComponent, GetVerbsEvent<EquipmentVerb>>(OnHolderGetEquipmentVerbs);
 
