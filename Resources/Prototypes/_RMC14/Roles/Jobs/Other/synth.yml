@@ -110,8 +110,6 @@
   - type: EyeProtection
   - type: WoundableUntreatable
   - type: Insulated
-  - type: RMCLeapProtection
-    inherentStunDuration: 3
   - type: ZombieImmune
 
 - type: entity
