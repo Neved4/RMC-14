@@ -202,6 +202,19 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
             if (sectionControl is not CMAutomatedVendorSection section)
                 continue;
 
+            var sectionValid = section.Section == null || IsSectionValid(section.Section);
+            if (!sectionValid)
+            {
+                foreach (var entriesControl in section.Entries.Children)
+                {
+                    if (entriesControl is CMAutomatedVendorEntry entry)
+                        entry.Visible = false;
+                }
+
+                section.Visible = false;
+                continue;
+            }
+
             var any = false;
             foreach (var entriesControl in section.Entries.Children)
             {
@@ -217,7 +230,7 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
                     any = true;
             }
 
-            section.Visible = any && (section.Section == null || IsSectionValid(section.Section));
+            section.Visible = any;
         }
     }
 
