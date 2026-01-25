@@ -8,10 +8,7 @@
   },
   "states": [
     {
-      "name": "trackoff"
-    },
-    {
-      "name": "trackon-northwest",
+      "name": "trackon-northwest_fl",
       "delays": [
         [
           0.5,
@@ -20,7 +17,7 @@
       ]
     },
     {
-      "name": "trackon-north",
+      "name": "trackon-north_fl",
       "delays": [
         [
           0.5,
@@ -29,7 +26,7 @@
       ]
     },
     {
-      "name": "trackon-northeast",
+      "name": "trackon-northeast_fl",
       "delays": [
         [
           0.5,
@@ -38,7 +35,7 @@
       ]
     },
     {
-      "name": "trackon-east",
+      "name": "trackon-east_fl",
       "delays": [
         [
           0.5,
@@ -47,7 +44,7 @@
       ]
     },
     {
-      "name": "trackon-southeast",
+      "name": "trackon-southeast_fl",
       "delays": [
         [
           0.5,
@@ -56,7 +53,7 @@
       ]
     },
     {
-      "name": "trackon-south",
+      "name": "trackon-south_fl",
       "delays": [
         [
           0.5,
@@ -65,7 +62,7 @@
       ]
     },
     {
-      "name": "trackon-southwest",
+      "name": "trackon-southwest_fl",
       "delays": [
         [
           0.5,
@@ -74,7 +71,7 @@
       ]
     },
     {
-      "name": "trackon-west",
+      "name": "trackon-west_fl",
       "delays": [
         [
           0.5,
@@ -83,7 +80,7 @@
       ]
     },
     {
-      "name": "trackon-direct",
+      "name": "trackon-direct_fl",
       "delays": [
         [
           0.5,
