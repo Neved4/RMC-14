@@ -12,6 +12,7 @@
   parent: CMFloorCargoBase
   id: CMFloorCargoArrowDown
   sprite: /Textures/_RMC14/Tiles/almayer/cargo_arrow_0.png
+  allowRotationMirror: true
 
 - type: tile
   parent: CMFloorCargoBase
