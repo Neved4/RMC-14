@@ -22,8 +22,8 @@ tilemap:
   45: CMFloorAsteroidStriped6
   3: CMFloorCargo
   30: CMFloorCargoArrowDown
-  5: CMFloorCargoArrowLeft
-  4: CMFloorCargoArrowRight
+  5: CMFloorCargoArrowDown
+  4: CMFloorCargoArrowDown
   46: CMFloorPlate
   2: CMFloorPlating
   0: CMFloorSteel
