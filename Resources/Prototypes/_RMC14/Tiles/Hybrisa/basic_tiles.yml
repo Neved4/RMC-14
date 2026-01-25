@@ -79,6 +79,7 @@
   id: RMCFloorHybrisaRampNorth
   name: ramp
   sprite: /Textures/_RMC14/Tiles/hybrisa/rampsmaller_north.png
+  allowRotationMirror: true
 
 - type: tile
   parent: RMCFloorHybrisaRampNorth
@@ -100,6 +101,7 @@
   id: RMCFloorHybrisaStripeRedNorth
   name: red stripe
   sprite: /Textures/_RMC14/Tiles/hybrisa/stripe_red_north.png
+  allowRotationMirror: true
 
 - type: tile
   parent: RMCFloorHybrisaBasicBase
