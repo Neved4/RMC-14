@@ -15,6 +15,10 @@
   - type: InteractionOutline
   - type: Clickable
   - type: RotaryPhone
+    dialingIdleSound: !type:SoundPathSpecifier
+      path: /Audio/_RMC14/Phone/ring_outgoing.ogg
+      params:
+        volume: -6
   - type: ContainerContainer
     containers:
       rmc_rotary_phone_telephone: !type:ContainerSlot
