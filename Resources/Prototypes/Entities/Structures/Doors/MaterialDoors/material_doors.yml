@@ -36,12 +36,8 @@
     closingAnimationTime: 1.2
     openSound:
       path: /Audio/Effects/stonedoor_openclose.ogg
-      params:
-        volume: -5
     closeSound:
       path: /Audio/Effects/stonedoor_openclose.ogg
-      params:
-        volume: -5
   - type: Appearance
   - type: Airtight
   - type: Damageable
@@ -98,12 +94,8 @@
     openTimeTwo: 0.2
     openSound:
       path: /Audio/Effects/door_open.ogg
-      params:
-        volume: -5
     closeSound:
       path: /Audio/Effects/door_close.ogg
-      params:
-        volume: -5
   - type: Damageable
     damageContainer: StructuralInorganic
     damageModifierSet: Wood
@@ -144,12 +136,8 @@
   - type: Door
     openSound:
       path: /Audio/Effects/paperdoor_openclose.ogg
-      params:
-        volume: -5
     closeSound:
       path: /Audio/Effects/paperdoor_openclose.ogg
-      params:
-        volume: -5
 
 - type: entity
   id: PlasmaDoor
@@ -224,12 +212,8 @@
   - type: Door
     openSound:
       path: /Audio/Items/bikehorn.ogg
-      params:
-        volume: -5
     closeSound:
       path: /Audio/Items/bikehorn.ogg
-      params:
-        volume: -5
 
 - type: entity
   id: WebDoor
@@ -275,9 +259,5 @@
   - type: Door
     closeSound:
       path: /Audio/Effects/rustle1.ogg
-      params:
-        volume: -5
     openSound:
       path: /Audio/Effects/rustle2.ogg
-      params:
-        volume: -5
