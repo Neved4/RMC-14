@@ -26,8 +26,12 @@
         Blunt: 25 # yowch
     openSound:
       path: /Audio/Machines/blastdoor.ogg
+      params:
+        volume: -5
     closeSound:
       path: /Audio/Machines/blastdoor.ogg
+      params:
+        volume: -5
   - type: Occluder
   - type: Appearance
   - type: RadiationBlocker

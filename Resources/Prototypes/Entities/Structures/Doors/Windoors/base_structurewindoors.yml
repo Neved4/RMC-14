@@ -119,8 +119,12 @@
     closingAnimationTime: 0.9
     openSound:
       path: /Audio/Machines/windoor_open.ogg
+      params:
+        volume: -5
     closeSound:
       path: /Audio/Machines/windoor_open.ogg
+      params:
+        volume: -5
     denySound:
       path: /Audio/Machines/airlock_deny.ogg
   - type: Airlock
