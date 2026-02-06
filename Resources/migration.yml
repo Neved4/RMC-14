@@ -1546,3 +1546,20 @@ ArmorHelmetPMCKutjevo: RMCArmorHelmetPMCKutjevo
 ArmorHelmetPMCOfficer: RMCArmorHelmetPMCOfficer
 ArmorHelmetPMCRiot: RMCArmorHelmetPMCRiot
 ArmorHelmetPMCRiotShield: RMCArmorHelmetPMCRiotShield
+
+# 2026-02-05 - Prefix RMC entities (Materials)
+BarbedWire1: RMCBarbedWire1
+BarbedWire10: RMCBarbedWire10
+BarbedWire15: RMCBarbedWire15
+BarbedWireBase: RMCBarbedWireBase
+Bedroll: RMCBedroll
+BedrollFolded: RMCBedrollFolded
+RCMWallShivaFab: RMCWallShivaFab
+RCMWallShivaIce: RMCWallShivaIce
+RCMWallShivaInvincibleFab: RMCWallShivaInvincibleFab
+RCMWallShivaReinforcedFab: RMCWallShivaReinforcedFab
+RCMWallShivaReinforcedFabBlue: RMCWallShivaReinforcedFabBlue
+RCMWallShivaReinforcedFabOrange: RMCWallShivaReinforcedFabOrange
+RCMWallShivaReinforcedFabPink: RMCWallShivaReinforcedFabPink
+RCMWallShivaReinforcedFabRed: RMCWallShivaReinforcedFabRed
+RCMWallShivaReinforcedFabWhite: RMCWallShivaReinforcedFabWhite
