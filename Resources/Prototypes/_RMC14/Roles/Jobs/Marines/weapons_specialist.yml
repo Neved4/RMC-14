@@ -69,7 +69,7 @@
   equipment:
     jumpsuit: RMCJumpsuitMarine
     shoes: CMBootsBlackFilled
-    head: ArmorHelmetM10
+    head: RMCArmorHelmetM10
     gloves: CMHandsBlackMarine
     id: CMDogtagWeaponsSpecialist
     ears: CMHeadsetAlpha
