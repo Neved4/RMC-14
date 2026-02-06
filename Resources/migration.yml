@@ -1546,3 +1546,9 @@ SpawnRMCTrainingDummy: RMCSpawnRMCTrainingDummy
 StalkyBush01: RMCStalkyBush01
 StalkyBush02: RMCStalkyBush02
 StalkyBush03: RMCStalkyBush03
+
+# 2026-02-12 - Prefix RMC entities (Factions)
+FactionMarine: RMCFactionMarine
+FactionSurvivor: RMCFactionSurvivor
+FactionTSE: RMCFactionTSE
+FactionWeYa: RMCFactionWeYa
