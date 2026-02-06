@@ -1520,3 +1520,8 @@ FactionMarine: RMCFactionMarine
 FactionSurvivor: RMCFactionSurvivor
 FactionTSE: RMCFactionTSE
 FactionWeYa: RMCFactionWeYa
+
+# 2026-02-03 - Prefix RMC entities (Gear)
+ArmorHelmetM10RMC: RMCArmorHelmetM10RMC
+GoldHandcannonBeltFilled: RMCGoldHandcannonBeltFilled
+JumpsuitMarine: RMCJumpsuitMarine
