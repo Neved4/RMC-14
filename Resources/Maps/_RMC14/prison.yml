@@ -175567,7 +175567,7 @@ entities:
       - 21507
       - 21508
       - 21531
-- proto: XenoWeedsWall
+- proto: RMCXenoWeedsWall
   entities:
   - uid: 21585
     components:

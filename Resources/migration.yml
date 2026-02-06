@@ -1673,3 +1673,8 @@ WeaponShotgunM42A1: RMCWeaponShotgunM42A1
 WeaponShotgunM42A2: RMCWeaponShotgunM42A2
 WeaponShotgunM890Guard: RMCWeaponShotgunM890Guard
 XenoSpikeProjectile: RMCXenoSpikeProjectile
+
+# 2026-02-17 - Prefix RMC entities (Xeno)
+XenoBombardAcidProjectile: RMCXenoBombardAcidProjectile
+XenoBombardNeurotoxinProjectile: RMCXenoBombardNeurotoxinProjectile
+XenoWeedsWall: RMCXenoWeedsWall
