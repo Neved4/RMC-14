@@ -1666,3 +1666,8 @@ WeaponRifleMAR40: RMCWeaponRifleMAR40
 WeaponRifleXM88: RMCWeaponRifleXM88
 
 RMCSentryConstruct: RMCSentry
+
+# 2026-02-08 - Prefix RMC entities (Xeno)
+XenoBombardAcidProjectile: RMCXenoBombardAcidProjectile
+XenoBombardNeurotoxinProjectile: RMCXenoBombardNeurotoxinProjectile
+XenoWeedsWall: RMCXenoWeedsWall
