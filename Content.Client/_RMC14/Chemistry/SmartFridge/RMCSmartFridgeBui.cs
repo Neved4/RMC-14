@@ -2,6 +2,7 @@
 using Content.Shared._RMC14.Chemistry.SmartFridge;
 using Content.Shared._RMC14.UserInterface;
 using JetBrains.Annotations;
+using static System.StringComparison;
 using Robust.Client.GameObjects;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
@@ -22,7 +23,16 @@ public sealed class RMCSmartFridgeBui : BoundUserInterface, IRefreshableBui
 
     private RMCSmartFridgeWindow? _window;
 
-    private readonly SortedDictionary<string, SortedDictionary<string, int>> _contents = new();
+    private readonly SortedDictionary<string, SortedDictionary<string, int>> _contents =
+        new(Comparer<string>.Create(static (left, right) =>
+        {
+            var leftIsPills = left.Equals("Pills", OrdinalIgnoreCase);
+            var rightIsPills = right.Equals("Pills", OrdinalIgnoreCase);
+
+            return leftIsPills == rightIsPills
+                ? StringComparer.Ordinal.Compare(left, right)
+                : leftIsPills ? -1 : 1;
+        }));
     private readonly Dictionary<string, EntityUid> _first = new();
 
     public RMCSmartFridgeBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
