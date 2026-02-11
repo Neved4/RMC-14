@@ -2,7 +2,6 @@
 using Content.Shared._RMC14.Chemistry.SmartFridge;
 using Content.Shared._RMC14.UserInterface;
 using JetBrains.Annotations;
-using static System.StringComparison;
 using Robust.Client.GameObjects;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
@@ -23,17 +22,11 @@ public sealed class RMCSmartFridgeBui : BoundUserInterface, IRefreshableBui
 
     private RMCSmartFridgeWindow? _window;
 
-    private readonly SortedDictionary<string, SortedDictionary<string, int>> _contents =
-        new(Comparer<string>.Create(static (left, right) =>
-        {
-            var leftIsPills = left.Equals("Pills", OrdinalIgnoreCase);
-            var rightIsPills = right.Equals("Pills", OrdinalIgnoreCase);
-
-            return leftIsPills == rightIsPills
-                ? StringComparer.Ordinal.Compare(left, right)
-                : leftIsPills ? -1 : 1;
-        }));
-    private readonly Dictionary<string, EntityUid> _first = new();
+    private readonly Dictionary<string, SortedDictionary<string, int>> _contents =
+        new(StringComparer.Ordinal);
+    private readonly Dictionary<string, int> _categorySortPriority =
+        new(StringComparer.Ordinal);
+    private readonly Dictionary<(string Category, string Name), EntityUid> _first = new();
 
     public RMCSmartFridgeBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
@@ -71,12 +64,9 @@ public sealed class RMCSmartFridgeBui : BoundUserInterface, IRefreshableBui
         _window.ContentsEmptyLabel.Visible = false;
         tabs.Visible = true;
 
-        foreach (var list in _contents.Values)
-        {
-            list.Clear();
-        }
-
+        _contents.Clear();
         _first.Clear();
+        _categorySortPriority.Clear();
         foreach (var contained in container.ContainedEntities)
         {
             if (!_insertableQuery.TryComp(contained, out var comp))
@@ -85,19 +75,24 @@ public sealed class RMCSmartFridgeBui : BoundUserInterface, IRefreshableBui
             if (!_metaDataQuery.TryComp(contained, out var metaData))
                 continue;
 
-            var categoryName = comp.Category;
-            if (_loc.TryGetString(comp.Category, out var categoryLoc))
-                categoryName = categoryLoc;
-
             var name = metaData.EntityName;
-            var category = _contents.GetOrNew(categoryName);
+            var category = _contents.GetOrNew(comp.Category);
             category[name] = category.GetValueOrDefault(name) + 1;
-            _first.TryAdd(name, contained);
+            _first.TryAdd((comp.Category, name), contained);
+
+            if (!_categorySortPriority.TryGetValue(comp.Category, out var currentPriority) ||
+                comp.CategorySortPriority < currentPriority)
+            {
+                _categorySortPriority[comp.Category] = comp.CategorySortPriority;
+            }
         }
 
         var i = 0;
-        foreach (var (category, contents) in _contents)
+        var categories = new List<string>(_contents.Keys);
+        categories.Sort(CompareCategories);
+        foreach (var category in categories)
         {
+            var contents = _contents[category];
             if (contents.Count == 0)
                 continue;
 
@@ -112,13 +107,17 @@ public sealed class RMCSmartFridgeBui : BoundUserInterface, IRefreshableBui
                 tabs.AddChild(section);
             }
 
-            TabContainer.SetTabTitle(section, category);
+            var categoryName = category;
+            if (_loc.TryGetString(category, out var categoryLoc))
+                categoryName = categoryLoc;
+
+            TabContainer.SetTabTitle(section, categoryName);
             TabContainer.SetTabVisible(section, true);
 
             var j = 0;
             foreach (var (name, amount) in contents)
             {
-                if (!_first.TryGetValue(name, out var first))
+                if (!_first.TryGetValue((category, name), out var first))
                 {
                     j++;
                     continue;
@@ -179,5 +178,16 @@ public sealed class RMCSmartFridgeBui : BoundUserInterface, IRefreshableBui
         {
             tabs.CurrentTab = 0;
         }
+    }
+
+    private int CompareCategories(string leftCategory, string rightCategory)
+    {
+        var leftPriority = _categorySortPriority.GetValueOrDefault(leftCategory);
+        var rightPriority = _categorySortPriority.GetValueOrDefault(rightCategory);
+
+        if (leftPriority != rightPriority)
+            return leftPriority.CompareTo(rightPriority);
+
+        return StringComparer.Ordinal.Compare(leftCategory, rightCategory);
     }
 }

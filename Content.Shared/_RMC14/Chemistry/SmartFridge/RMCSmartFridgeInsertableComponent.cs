@@ -8,4 +8,7 @@ public sealed partial class RMCSmartFridgeInsertableComponent : Component
 {
     [DataField, AutoNetworkedField]
     public string Category = "Other";
+
+    [DataField, AutoNetworkedField]
+    public int CategorySortPriority;
 }

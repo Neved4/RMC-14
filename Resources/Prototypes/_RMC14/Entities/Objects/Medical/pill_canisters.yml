@@ -82,6 +82,7 @@
       - RMCBeltMedical
   - type: RMCSmartFridgeInsertable
     category: Pills
+    categorySortPriority: -1
   - type: PhysicalComposition
     materialComposition:
       RMCPlastic: 500
